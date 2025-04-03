@@ -31,7 +31,7 @@ app.post("/login", (req, res) => {
 // Check Room Availability
 app.get("/rooms", (req, res) => {
   db.query("SELECT * FROM Rooms WHERE status = 'Available'", (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {console.log(err);return res.status(500).json({ error: err.message })};
     res.json(results);
   });
 });
@@ -43,7 +43,7 @@ app.post("/book", (req, res) => {
     "INSERT INTO Bookings (user_id, room_id, check_in, check_out) VALUES (?, ?, ?, ?)",
     [user_id, room_id, check_in, check_out],
     (err, result) => {
-      if (err) return res.status(500).json({ error: err.message });
+      if (err) {console.log(err);return res.status(500).json({ error: err.message })};
       res.json({ message: "Room booked successfully" });
     }
   );
@@ -52,7 +52,7 @@ app.post("/book", (req, res) => {
 // Cancel Booking
 app.delete("/cancel/:id", (req, res) => {
   db.query("DELETE FROM Bookings WHERE booking_id = ?", [req.params.id], (err, result) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {console.log(err);return res.status(500).json({ error: err.message })};
     res.json({ message: "Booking cancelled" });
   });
 });

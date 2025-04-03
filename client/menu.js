@@ -34,11 +34,11 @@ async function userMenu() {
                 break;
             
             case "3":
-                let userId = prompt("Enter your user ID: ");
-                let roomId = prompt("Enter room ID to book: ");
-                let checkIn = prompt("Enter check-in date (YYYY-MM-DD): ");
-                let checkOut = prompt("Enter check-out date (YYYY-MM-DD): ");
-                await axios.post(`${baseURL}/book`, { userId, roomId, checkIn, checkOut });
+                let user_id = prompt("Enter your user ID: ");
+                let room_id = prompt("Enter room ID to book: ");
+                let check_in = prompt("Enter check-in date (YYYY-MM-DD): ");
+                let check_out = prompt("Enter check-out date (YYYY-MM-DD): ");
+                await axios.post(`${baseURL}/book`, { user_id, room_id, check_in, check_out });
                 console.log("Room booked successfully!");
                 break;
             
@@ -49,7 +49,7 @@ async function userMenu() {
                 break;
             
             case "5":
-                let userBookings = await axios.get(`${baseURL}/user-bookings/${prompt("Enter user ID: ")}`);
+                let userBookings = await axios.get(`${baseURL}/booking/${prompt("Enter booking ID: ")}`);
                 console.log("Your Bookings:", userBookings.data);
                 break;
 
@@ -68,14 +68,14 @@ async function userMenu() {
             
             case "8":
                 let serviceDetails = prompt("Enter service request details: ");
-                await axios.post(`${baseURL}/request-service`, { userId, roomId, requestDetails: serviceDetails });
+                await axios.post(`${baseURL}/request-service`, { user_id, room_id, requestDetails: serviceDetails });
                 console.log("Service requested successfully!");
                 break;
 
             case "9":
                 let feedback = prompt("Enter feedback: ");
                 let rating = prompt("Enter rating (1-5): ");
-                await axios.post(`${baseURL}/feedback`, { userId, message: feedback, rating });
+                await axios.post(`${baseURL}/feedback`, { user_id, message: feedback, rating });
                 console.log("Feedback submitted!");
                 break;
 
@@ -112,8 +112,8 @@ async function staffMenu() {
 
             case "2":
                 let assignBookingId = prompt("Enter booking ID: ");
-                let assignRoomId = prompt("Enter room ID: ");
-                await axios.put(`${baseURL}/assign-room`, { bookingId: assignBookingId, roomId: assignRoomId });
+                let assignroom_id = prompt("Enter room ID: ");
+                await axios.put(`${baseURL}/assign-room`, { bookingId: assignBookingId, room_id: assignroom_id });
                 console.log("Room assigned!");
                 break;
 
